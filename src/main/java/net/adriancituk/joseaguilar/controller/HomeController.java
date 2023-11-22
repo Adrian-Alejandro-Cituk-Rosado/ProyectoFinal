@@ -81,7 +81,7 @@ public class HomeController {
 	@GetMapping("/edit/{id}")
 	public String editar(@PathVariable("id") int idVacante,Model model) {
 		Cliente vacante= serviceClientes.buscarPorId(idVacante);
-		model.addAttribute("clientes", vacante);
+		model.addAttribute("cliente", vacante);
 	
 		return "/formCliente";
 	}
