@@ -75,7 +75,7 @@ public class HomeController {
 	public String eliminar(@PathVariable("id") int idVacante,RedirectAttributes attributes) {
 		System.out.println("Borrando vacante con id: "+idVacante);
 		serviceClientes.eliminar(idVacante);
-		attributes.addFlashAttribute("msg","La vacante fue eliminada!");
+		attributes.addFlashAttribute("msg","El usuario fue eliminado!");
 		return "redirect:/";
 	}
 	@GetMapping("/edit/{id}")

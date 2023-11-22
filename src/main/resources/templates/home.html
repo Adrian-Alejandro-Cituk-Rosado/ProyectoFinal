@@ -29,7 +29,7 @@
 				<div class="card-body">
 					<a th:href="@{/create}" class="btn btn-success" title="Crear nuevo cliente"
 						role="button">
-						<i class="fas fa-file" aria-hidden="true"></i> Nueva
+						<i class="fas fa-user" aria-hidden="true"></i> Nueva
 					</a>
 					<hr>
 					<div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
@@ -56,7 +56,7 @@
 								<td th:text="${cliente.createAt}"></td>
 								<td><a th:href="@{/create}" class="btn btn-primary" title="Crear nuevo cliente"
 									role="button">
-									<i  aria-hidden="true"></i> Crear factura
+									<i  class="fas fa-file"aria-hidden="true"></i> Crear factura
 								</a></td>
 								<td><!-- Fecha de publicación formateada -->
 									<a th:href="@{/edit/{id} (id=${cliente.id})}" class="btn btn-primary btn-sm" role="button"
