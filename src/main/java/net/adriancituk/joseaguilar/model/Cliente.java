@@ -19,6 +19,9 @@ public class Cliente {
 	private String apellido;
 	private String email;
 	private Date createAt;
+	public void reset() {
+		this.imagen=null;
+	}
 	public Integer getId() {
 		return id;
 	}

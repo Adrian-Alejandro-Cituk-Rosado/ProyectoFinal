@@ -48,7 +48,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="cliente : ${clientes}">
-								<td><img th:src="@{/images/} + ${cliente.imagen}" alt="Imagen del alumno" style="width: 100px; height: 100px;" /></td>
+								<td><img th:src="@{/logos/} + ${cliente.imagen}" alt="Imagen del alumno" style="width: 100px; height: 100px;" /></td>
 								<td th:text="${cliente.id}"></td> <!-- No se mostrará la categoría -->
 								<td th:text="${cliente.nombre}"></td> <!-- Nombre de la vacante -->
 								<td th:text="${cliente.apellido}"></td>
