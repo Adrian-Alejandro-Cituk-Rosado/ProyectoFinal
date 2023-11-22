@@ -6,16 +6,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="Cliente")
 public class Cliente {
+	private String imagen="no-image.png";
 	@Id
 	@GeneratedValue(strategy=(GenerationType.IDENTITY))
 	private Integer id;
 	private String nombre;
 	private String apellido;
 	private String email;
-	private Date fecha;
+	private Date createAt;
 	public Integer getId() {
 		return id;
 	}
@@ -40,17 +43,24 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getFecha() {
-		return fecha;
+	public String getImagen() {
+		return imagen;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", fecha="
-				+ fecha + "]";
+		return "Cliente [imagen=" + imagen + ", id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email="
+				+ email + ", createAt=" + createAt + "]";
 	}
+	
 	
 	
 }
