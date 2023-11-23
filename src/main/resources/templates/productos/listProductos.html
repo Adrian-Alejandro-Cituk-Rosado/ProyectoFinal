@@ -1,0 +1,91 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="favicon.ico">
+
+	<title>Proyecto final</title>
+	<!-- Bootstrap core CSS -->
+	<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+	<link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+	<header th:insert="fragments/menu :: menu-principal"></header>
+
+	<main role="main">
+		<hr>
+		<div class="container">
+
+			<div class="card">
+				<h4 class="card-header"><strong>Listado de Clientes</strong></h4>
+				<div class="card-body">
+					<a th:href="@{/create}" class="btn btn-success" title="Crear nuevo cliente"
+						role="button">
+						<i class="fas fa-user" aria-hidden="true"></i> Crear Cliente
+					</a>
+					<hr>
+					<div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+					<table class="table table-hover ">
+						<thead class="thead-dark">
+							<tr>
+								
+								<th scope="col">Id</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Precio</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="producto : ${productos}">
+								
+								<td th:text="${producto.idProducto}"></td> <!-- No se mostrará la categoría -->
+								<td th:text="${producto.nombreProducto}"></td> <!-- Nombre de la vacante -->
+								<td th:text="${producto.precioProducto}"></td>
+								
+								<td><a th:href="@{/create}" class="btn btn-primary" title="Crear nuevo producto"
+									role="button">
+									<i  class="fas fa-file"aria-hidden="true"></i> Crear factura
+								</a></td>
+								<td><!-- Fecha de publicación formateada -->
+									<a th:href="@{/edit/{id} (id=${producto.idProducto})}" class="btn btn-primary btn-sm" role="button"
+										title="Editar el registro.">
+										<i class="fas fa-pencil-alt" aria-hidden="true"></i>
+									</a>
+									</td>
+								<td><a th:href="@{/delete/{id} (id=${producto.idProducto})}" onclick="return confirm('¿Estás seguro?')"
+									class="btn btn-danger btn-sm" role="button" title="Eliminar el registro.">
+									<i class="fas fa-trash" aria-hidden="true"></i>
+								</a></td>
+
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div> <!-- /container -->
+
+	</main>
+
+	<footer th:insert="fragments/footer :: pie-pagina" class="footer">
+
+	</footer>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
