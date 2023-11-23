@@ -28,20 +28,20 @@
         <div class="card">
           <h4 class="card-header"><strong>Productos</strong></h4>              
           <div class="card-body">
-            <form th:action="@{/save}" method="post" th:object="${cliente}"enctype="multipart/form-data">   
+            <form th:action="@{/productos/save}" method="post" th:object="${producto}"enctype="multipart/form-data">   
               <div class="row">
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="nombreProducto">Nombre</label>
                     <input type="hidden" th:field="*{idProducto}">
                     
-                    <input type="text" class="form-control" th:field="*{nombreProducto}" id="nombreProducto" name="nombreProducto" placeholder="nombreProducto" required="required">
+                    <input type="text" class="form-control" th:field="*{nombreProducto}" id="nombreProducto" name="nombreProducto" placeholder="Nombre" required="required">
                   </div>
                 </div>
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="precioProducto">Precio</label>
-                    <input type="text" class="form-control" th:field="*{precioProducto}" id="precioProducto" name="precioProducto" placeholder="precioProducto" required="required">
+                    <input type="text" class="form-control" th:field="*{precioProducto}" id="precioProducto" name="precioProducto" placeholder="Precio" required="required">
                   </div>
                 </div>
                

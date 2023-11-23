@@ -2,6 +2,7 @@ package net.adriancituk.joseaguilar.service;
 
 import java.util.List;
 
+import net.adriancituk.joseaguilar.model.Cliente;
 import net.adriancituk.joseaguilar.model.Producto;
 
 
@@ -15,12 +16,13 @@ public interface IProductoService {
 	 * 	   sera la fecha actual del sistema.
 	 * @param usuario
 	 */
-	void guardar(Producto producto);
+	void guardar(Producto vacante);
 	
 	// Ejercicio: Método que elimina un usuario de la base de datos.
 	void eliminar(Integer idProducto);
 	
 	// Ejercicio: Implementar método que recupera todos los usuarios. Usar vista de listUsuarios.html
 	List<Producto> buscarTodos();
+	Producto buscarPorId(Integer idProducto);
 	
 }
