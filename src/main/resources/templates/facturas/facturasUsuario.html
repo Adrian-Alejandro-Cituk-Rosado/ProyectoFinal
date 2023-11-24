@@ -1,10 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Crear Factura</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
 </head>
 <body>
 
-</body>
+    <!-- Encabezado y menú -->
+    <header th:insert="fragments/menu :: menu-principal"></header>
+
+    <!-- Contenido principal -->
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+        <div class="card">
+          <h4 class="card-header"><strong>Datos del cliente</strong></h4>              
+          <div class="card-body">
+            <form th:action="@{/facturas/save}" method="post" th:object="${factura}" enctype="multipart/form-data">   
+              
+              <!-- Datos del Cliente -->
+              <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="clienteId">Nombre del Cliente:</label>
+                        <input type="text" class="form-control" id="clienteId" th:value="${factura.cliente.nombre}" readonly>
+                    </div>
+                </div>
+              </div>
+              
+              <!-- Campos del formulario -->
+              <div class="row">
+                <div class="col-md-4"> 
+                  <div class="form-group">
+                    <label for="folio">Folio:</label>
+                    <input type="text" class="form-control" id="folio" th:field="*{folio}" placeholder="Ingrese el folio" required="required">
+                  </div>
+                </div>
+                <div class="col-md-4"> 
+                  <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" placeholder="Ingrese la descripción" required="required">
+                  </div>
+                </div>
+                <div class="col-md-4"> 
+                  <div class="form-group">
+                    <label for="observacion">Observación:</label>
+                    <textarea style="resize: none;" class="form-control" id="observacion" th:field="*{observacion}" placeholder="Ingrese la observación"></textarea>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Fecha -->
+              <div class="row">
+                <div class="col-md-4"> 
+                  <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="text" class="form-control" th:field ="*{fecha}" name="fecha" id="fecha" placeholder="Fecha" required="required">
+                  </div>  
+                </div>
+              </div>
+
+              <!-- Botón de Guardar -->
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Guardar
+                  </button>
+                </div>
+              </div>
+              
+            </form>
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer th:insert="/fragments/footer :: pie-pagina" class="footer"></footer>
+
+    <!-- Bootstrap core JavaScript y otros scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>    
+    <script>
+       $(function () {
+        $("#fecha").datepicker({
+            dateFormat: 'dd-mm-yy',
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: 'c-100:c+10'
+        });
+    });
+    </script>
+  </body>
 </html>
+

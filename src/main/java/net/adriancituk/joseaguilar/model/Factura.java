@@ -3,6 +3,7 @@ package net.adriancituk.joseaguilar.model;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +21,8 @@ public class Factura {
 	private String descripcion;
 	private String observacion;
 	private Date fecha;
-	@ManyToOne
+    
+	@ManyToOne(fetch = FetchType.EAGER) // Agregar esta línea
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 	public Integer getId() {

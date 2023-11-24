@@ -1,11 +1,14 @@
 package net.adriancituk.joseaguilar.model;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +22,8 @@ public class Cliente {
 	private String apellido;
 	private String email;
 	private Date createAt;
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Factura> facturas;
 	public void reset() {
 		this.imagen=null;
 	}
@@ -58,11 +63,18 @@ public class Cliente {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
 	@Override
 	public String toString() {
 		return "Cliente [imagen=" + imagen + ", id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email="
-				+ email + ", createAt=" + createAt + "]";
+				+ email + ", createAt=" + createAt + ", facturas=" + facturas + "]";
 	}
+	
 	
 	
 	

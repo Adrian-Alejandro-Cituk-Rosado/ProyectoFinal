@@ -55,10 +55,9 @@
 								<td th:text="${cliente.apellido}"></td>
 								<td th:text="${cliente.email}"></td>
 								<td th:text="${cliente.createAt}"></td>
-								<td><a th:href="@{/create}" class="btn btn-primary" title="Crear nueva factura"
-									role="button">
-									<i  class="fas fa-file"aria-hidden="true"></i> Crear factura
-								</a></td>
+								<td> <a th:href="@{/facturas/create/{id}(id=${cliente.id})}" class="btn btn-primary" title="Crear nueva factura" role="button">
+        <i class="fas fa-file" aria-hidden="true"></i> Crear factura
+    </a></td>
 								<td><!-- Fecha de publicación formateada -->
 									<a th:href="@{/edit/{id} (id=${cliente.id})}" class="btn btn-primary btn-sm" role="button"
 										title="Editar el registro.">

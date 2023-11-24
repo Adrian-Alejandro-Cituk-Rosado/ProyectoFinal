@@ -49,7 +49,7 @@
 								
 								<td th:text="${producto.idProducto}"></td> <!-- No se mostrará la categoría -->
 								<td th:text="${producto.nombreProducto}"></td> <!-- Nombre de la vacante -->
-								<td th:text="${producto.precioProducto}"></td>								
+								<td th:text="'$' + ${producto.precioProducto}"></td>							
 								<td><!-- Fecha de publicación formateada -->
 									<a th:href="@{/productos/edit/{id} (id=${producto.idProducto})}" class="btn btn-primary btn-sm" role="button"
 										title="Editar el registro.">

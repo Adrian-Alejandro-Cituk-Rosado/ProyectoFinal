@@ -54,7 +54,7 @@ public class ProductoController {
 	public String guardar(Producto vacante,BindingResult result,RedirectAttributes attributes) {
 		
 		serviceProducto.guardar(vacante);
-		attributes.addFlashAttribute("msg","Registro Guardado");
+		attributes.addFlashAttribute("msg","Producto Guardado");
 		
 		System.out.println(" Producto: "+vacante);
 		
