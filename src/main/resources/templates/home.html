@@ -25,11 +25,11 @@
 		<div class="container">
 
 			<div class="card">
-				<h4 class="card-header" style="background-color: #292929; color: white;"><strong>Listado de Clientes</strong></h4>
+				<h4 class="card-header" style="background-color: #292929; color: white;"><strong>Listado de
+						Clientes</strong></h4>
 
 				<div class="card-body">
-					<a th:href="@{/create}" class="btn btn-success" title="Crear nuevo cliente"
-						role="button">
+					<a th:href="@{/create}" class="btn btn-success" title="Crear nuevo cliente" role="button">
 						<i class="fas fa-user" aria-hidden="true"></i> Crear Cliente
 					</a>
 					<hr>
@@ -50,25 +50,32 @@
 						</thead>
 						<tbody>
 							<tr th:each="cliente : ${clientes}">
-								<td><img th:src="@{/logos/} + ${cliente.imagen}" alt="Imagen del alumno" style="width: 100px; height: 100px;" /></td>
-								<td th:text="${cliente.id}"></td> <!-- No se mostrará la categoría -->
+								<td><img th:src="@{/logos/} + ${cliente.imagen}" alt="Imagen del alumno"
+										style="width: 100px; height: 100px;" /></td>
+								<td>
+									<a th:href="@{/ver/{id}(id=${cliente.id})}" class="btn btn-warning"
+										style="width: 30px; height: 30px; padding: 0;" th:text="${cliente.id}">
+									</a>
+								</td> <!-- No se mostrará la categoría -->
 								<td th:text="${cliente.nombre}"></td> <!-- Nombre de la vacante -->
 								<td th:text="${cliente.apellido}"></td>
 								<td th:text="${cliente.email}"></td>
 								<td th:text="${cliente.createAt}"></td>
-								<td> <a th:href="@{/facturas/create/{id}(id=${cliente.id})}" class="btn btn-primary" title="Crear nueva factura" role="button">
-        <i class="fas fa-file" aria-hidden="true"></i> Crear factura
-    </a></td>
+								<td> <a th:href="@{/facturas/create/{id}(id=${cliente.id})}" class="btn btn-primary"
+										title="Crear nueva factura" role="button">
+										<i class="fas fa-file" aria-hidden="true"></i> Crear factura
+									</a></td>
 								<td><!-- Fecha de publicación formateada -->
-									<a th:href="@{/edit/{id} (id=${cliente.id})}" class="btn btn-primary btn-sm" role="button"
-										title="Editar el registro.">
+									<a th:href="@{/edit/{id} (id=${cliente.id})}" class="btn btn-primary btn-sm"
+										role="button" title="Editar el registro.">
 										<i class="fas fa-pencil-alt" aria-hidden="true"></i>
 									</a>
-									</td>
-								<td><a th:href="@{/delete/{id} (id=${cliente.id})}" onclick="return confirm('¿Estás seguro?')"
-									class="btn btn-danger btn-sm" role="button" title="Eliminar el registro.">
-									<i class="fas fa-trash" aria-hidden="true"></i>
-								</a></td>
+								</td>
+								<td><a th:href="@{/delete/{id} (id=${cliente.id})}"
+										onclick="return confirm('¿Estás seguro?')" class="btn btn-danger btn-sm"
+										role="button" title="Eliminar el registro.">
+										<i class="fas fa-trash" aria-hidden="true"></i>
+									</a></td>
 
 								</td>
 							</tr>

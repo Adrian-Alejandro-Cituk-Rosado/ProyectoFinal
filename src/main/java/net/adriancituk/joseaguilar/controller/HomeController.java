@@ -85,7 +85,13 @@ public class HomeController {
 	
 		return "/formCliente";
 	}
+	@GetMapping("/ver/{id}")
+	public String ver(@PathVariable("id") int idVacante,Model model) {
+		Cliente vacante= serviceClientes.buscarPorId(idVacante);
+		model.addAttribute("cliente", vacante);
 	
+		return "/facturas/listFacturas";
+	}
 	
 	@ModelAttribute
 	public void setGenericos(Model model) {
