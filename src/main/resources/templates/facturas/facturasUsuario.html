@@ -23,70 +23,94 @@
 
     <!-- Contenido principal -->
     <main role="main">     
-      <hr>
-      <div class="container"> 
-        <div class="card">
-          <h4 class="card-header"><strong>Datos del cliente</strong></h4>              
-          <div class="card-body">
-            <form th:action="@{/facturas/save}" method="post" th:object="${factura}" enctype="multipart/form-data">   
-              
-              <!-- Datos del Cliente -->
-             <div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            <label for="clienteId">Nombre del Cliente:</label>
-            <input type="text" class="form-control" id="clienteId" th:value="${factura.cliente.nombre}" readonly>
-            <!-- Agrega un campo oculto para el ID del cliente -->
-            <input type="hidden" th:field="*{cliente.id}" />
-        </div>
-    </div>
-</div>
-              
-              <!-- Campos del formulario -->
-              <div class="row">
-                <div class="col-md-4"> 
-                  <div class="form-group">
-                    <label for="folio">Folio:</label>
-                    <input type="text" class="form-control" id="folio" th:field="*{folio}" placeholder="Ingrese el folio" required="required">
-                  </div>
-                </div>
-                <div class="col-md-4"> 
-                  <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
-                    <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" placeholder="Ingrese la descripción" required="required">
-                  </div>
-                </div>
-                <div class="col-md-4"> 
-                  <div class="form-group">
-                    <label for="observacion">Observación:</label>
-                    <textarea style="resize: none;" class="form-control" id="observacion" th:field="*{observacion}" placeholder="Ingrese la observación"></textarea>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Fecha -->
-              <div class="row">
-    <div class="col-md-4"> 
-        <div class="form-group">
-            <label for="fecha">Fecha:</label>
-            <input type="text" class="form-control" th:field ="*{fecha}" name="fecha" id="fecha" placeholder="Fecha" required="required" th:value="${#dates.format(factura.fecha, 'dd-MM-yyyy')}">
-        </div>  
-    </div>
-</div>
+        <hr>
+        <div class="container"> 
+            <div class="card">
+                <h4 class="card-header"><strong>Datos del cliente</strong></h4>              
+                <div class="card-body">
+                    <form th:action="@{/facturas/save}" method="post" th:object="${factura}" enctype="multipart/form-data">   
+                        
+                        <!-- Datos del Cliente -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="clienteId">Nombre del Cliente:</label>
+                                    <input type="text" class="form-control" id="clienteId" th:value="${factura.cliente.nombre}" readonly>
+                                    <!-- Agrega un campo oculto para el ID del cliente -->
+                                    <input type="hidden" th:field="*{cliente.id}" />
+                                </div>
+                            </div>
+                        </div>
 
-              <!-- Botón de Guardar -->
-              <div class="row">
-                <div class="col-md-12">
-                  <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Guardar
-                  </button>
+                        <!-- Campos del formulario -->
+                        <div class="row">
+                            <div class="col-md-4"> 
+                                <div class="form-group">
+                                    <label for="folio">Folio:</label>
+                                    <input type="text" class="form-control" id="folio" th:field="*{folio}" placeholder="Ingrese el folio" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4"> 
+                                <div class="form-group">
+                                    <label for="descripcion">Descripción:</label>
+                                    <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" placeholder="Ingrese la descripción" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4"> 
+                                <div class="form-group">
+                                    <label for="observacion">Observación:</label>
+                                    <textarea style="resize: none;" class="form-control" id="observacion" th:field="*{observacion}" placeholder="Ingrese la observación"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fecha -->
+                        <div class="row">
+                            <div class="col-md-4"> 
+                                <div class="form-group">
+                                    <label for="fecha">Fecha:</label>
+                                    <input type="text" class="form-control" th:field ="*{fecha}" name="fecha" id="fecha" placeholder="Fecha" required="required" th:value="${#dates.format(factura.fecha, 'dd-MM-yyyy')}">
+                                </div>  
+                            </div>
+                        </div>
+
+                        <!-- Selección de productos y cantidades -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5>Productos</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="producto : ${productos}">
+                                            <td th:text="${producto.nombreProducto}"></td>
+                                            <td>
+                                                <input type="number" name="cantidades" min="1" value="1">
+                                                <input type="hidden" name="productoIds" th:value="${producto.idProducto}">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Botón de Guardar -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </form>
                 </div>
-              </div>
-              
-            </form>
-          </div>
-        </div>
-      </div> <!-- /container -->
+            </div>
+        </div> <!-- /container -->
 
     </main>
 
@@ -110,4 +134,5 @@
     </script>
   </body>
 </html>
+
 
