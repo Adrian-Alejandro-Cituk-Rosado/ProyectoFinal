@@ -31,14 +31,16 @@
             <form th:action="@{/facturas/save}" method="post" th:object="${factura}" enctype="multipart/form-data">   
               
               <!-- Datos del Cliente -->
-              <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="clienteId">Nombre del Cliente:</label>
-                        <input type="text" class="form-control" id="clienteId" th:value="${factura.cliente.nombre}" readonly>
-                    </div>
-                </div>
-              </div>
+             <div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="clienteId">Nombre del Cliente:</label>
+            <input type="text" class="form-control" id="clienteId" th:value="${factura.cliente.nombre}" readonly>
+            <!-- Agrega un campo oculto para el ID del cliente -->
+            <input type="hidden" th:field="*{cliente.id}" />
+        </div>
+    </div>
+</div>
               
               <!-- Campos del formulario -->
               <div class="row">
@@ -64,13 +66,13 @@
               
               <!-- Fecha -->
               <div class="row">
-                <div class="col-md-4"> 
-                  <div class="form-group">
-                    <label for="fecha">Fecha:</label>
-                    <input type="text" class="form-control" th:field ="*{fecha}" name="fecha" id="fecha" placeholder="Fecha" required="required">
-                  </div>  
-                </div>
-              </div>
+    <div class="col-md-4"> 
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="text" class="form-control" th:field ="*{fecha}" name="fecha" id="fecha" placeholder="Fecha" required="required" th:value="${#dates.format(factura.fecha, 'dd-MM-yyyy')}">
+        </div>  
+    </div>
+</div>
 
               <!-- Botón de Guardar -->
               <div class="row">

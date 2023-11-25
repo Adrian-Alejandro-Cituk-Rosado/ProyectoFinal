@@ -23,7 +23,7 @@ public class Factura {
 	private Date fecha;
     
 	@ManyToOne(fetch = FetchType.EAGER) // Agregar esta línea
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "idCliente")
     private Cliente cliente;
 	public Integer getId() {
 		return id;
