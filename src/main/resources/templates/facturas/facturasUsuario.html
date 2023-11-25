@@ -75,23 +75,23 @@
 
                         <!-- Selección de productos y cantidades -->
                         <div class="row">
-                            <div class="col-md-12">
-                                <h5>Buscar Productos</h5>
-                                <div th:fragment="product-form">
-                                    <select id="productoId" class="custom-select" th:field="*{detalles[0].producto.idProducto}">
-                                        <option value="" selected>Seleccione un producto</option>
-                                        <option th:each="producto : ${productos}" th:value="${producto.idProducto}" th:text="${producto.nombreProducto}"></option>
-                                    </select>
-                                    <div class="form-group mb-3">
-                                        <label for="cantidad">Cantidad:</label>
-                                        <input type="number" class="form-control" id="cantidad" name="cantidades" min="1" value="1">
-                                    </div>
-                                    <button type="submit" class="btn btn-success mb-3">
-                                        <i class="fas fa-plus"></i> Agregar Producto
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+    <div class="col-md-12">
+        <h5>Buscar Productos</h5>
+        <div th:fragment="product-form">
+            <select id="productoId" class="custom-select" th:field="*{detalles[0].producto.idProducto}">
+                <option value="" selected>Seleccione un producto</option>
+                <option th:each="producto : ${productos}" th:value="${producto.idProducto}" th:text="${producto.nombreProducto}"></option>
+            </select>
+            <div class="form-group mb-3">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" class="form-control" id="cantidad" name="detalles[0].cantidad" min="1" value="1">
+            </div>
+            <button type="submit" class="btn btn-success mb-3">
+                <i class="fas fa-plus"></i> Agregar Producto
+            </button>
+        </div>
+    </div>
+</div>
                         
                         <!-- Botón de Guardar -->
                         <div class="row">

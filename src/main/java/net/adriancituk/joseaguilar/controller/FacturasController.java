@@ -77,38 +77,41 @@ public class FacturasController {
 
 	@PostMapping("/save")
 	public String guardarFactura(@ModelAttribute("factura") Factura factura, BindingResult result, RedirectAttributes attributes) {
-		 System.out.println("Factura recibida: " + factura.toString());
+	    System.out.println("Factura recibida: " + factura.toString());
 
-		    if (factura.getDescripcion() == null || factura.getDescripcion().isEmpty()) {
-		        // Manejo de error si la descripción está vacía
-		        System.out.println("Error: La descripción no puede estar vacía");
-		        // Puedes agregar un mensaje de error o redirigir a una página de error
-		        return "redirect:/facturas/facturasUsuario";
-		    }
-		
-		System.out.println("Factura recibida: " + factura.toString());
+	    if (factura.getDescripcion() == null || factura.getDescripcion().isEmpty()) {
+	        System.out.println("Error: La descripción no puede estar vacía");
+	        return "redirect:/facturas/facturasUsuario";
+	    }
 
-	    // 1. Obtención del Cliente
+	    if (factura.getDetalles() != null) {
+	        for (DetalleFactura detalle : factura.getDetalles()) {
+	            if (detalle.getCantidad() <= 0) {
+	                System.out.println("Error: La cantidad debe ser mayor que cero");
+	                return "redirect:/facturas/facturasUsuario";
+	            }
+	        }
+	    }
+
+	    // Obtención del Cliente
 	    Cliente cliente = serviceClientes.buscarPorId(factura.getCliente().getId());
 
 	    if (cliente != null) {
 	        factura.setCliente(cliente);
 
-	        // 2. Establecimiento de Detalles
+
 	        if (factura.getDetalles() != null) {
-	            // Establecer la relación de los detalles con la factura
 	            for (DetalleFactura detalle : factura.getDetalles()) {
 	                detalle.setFactura(factura);
 	                System.out.println("Detalle: " + detalle.toString());
 	            }
 	        }
 
-	        // 3. Guardado de Factura
+
 	        serviceFacturas.guardar(factura);
 
-	        // 4. Redirección y Mensaje de Éxito
 	        attributes.addFlashAttribute("msg", "Factura Guardada");
-	        return "redirect:/facturas/facturasUsuario";
+	        return "/facturas/detalleFactura";
 	    } else {
 	        // Manejo de error si el cliente no se encuentra
 	        // Puedes agregar un mensaje de error o redirigir a una página de error
@@ -116,6 +119,8 @@ public class FacturasController {
 	        return "redirect:/facturas/facturasUsuario"; // O redirige a una página de error
 	    }
 	}
+
+
 
     @GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idUsuario, RedirectAttributes attributes) {		    	
