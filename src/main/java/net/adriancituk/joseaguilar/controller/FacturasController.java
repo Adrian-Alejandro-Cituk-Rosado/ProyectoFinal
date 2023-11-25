@@ -99,7 +99,8 @@ public class FacturasController {
 
 	        // 4. Redirección y Mensaje de Éxito
 	        attributes.addFlashAttribute("msg", "Factura Guardada");
-	        return "redirect:/facturas/facturasUsuario";
+	        return "redirect:/facturas/detalleFactura/" + factura.getId();
+
 	    } else {
 	        // Manejo de error si el cliente no se encuentra
 	        // Puedes agregar un mensaje de error o redirigir a una página de error
@@ -137,4 +138,17 @@ public class FacturasController {
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
+	 @GetMapping("/detalleFactura/{id}")
+	    public String mostrarDetalleFactura(@PathVariable("id") int idFactura, Model model) {
+	        Factura factura = serviceFacturas.buscarPorId(idFactura);
+
+	        if (factura != null) {
+	            model.addAttribute("factura", factura);
+	            return "facturas/detalleFactura";
+	        } else {
+	            // Manejo de error si la factura no se encuentra
+	            // Puedes agregar un mensaje de error o redirigir a una página de error
+	            return "redirect:/facturas/facturasUsuario";
+	        }
+	    }
 }

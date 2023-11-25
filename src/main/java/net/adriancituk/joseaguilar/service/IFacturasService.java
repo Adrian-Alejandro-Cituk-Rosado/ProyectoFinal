@@ -16,4 +16,6 @@ public interface IFacturasService {
 	
 	List<Factura> buscarTodos();
 	
+	Factura buscarPorId(Integer id);
+	
 }
