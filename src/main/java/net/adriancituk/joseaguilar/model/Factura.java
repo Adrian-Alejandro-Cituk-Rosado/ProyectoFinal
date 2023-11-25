@@ -77,8 +77,9 @@ public class Factura {
 	}
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", folio=" + folio + ", descripcion=" + descripcion + ", observacion="
-				+ observacion + ", fecha=" + fecha + ", cliente=" + cliente + "]";
+	    return "Factura [id=" + id + ", folio=" + folio + ", descripcion=" + descripcion + ", observacion="
+	            + observacion + ", fecha=" + fecha + ", cliente=" +
+	            (cliente != null ? cliente.getId() + " - " + cliente.getNombre() : null) + "]";
 	}
 	
 }

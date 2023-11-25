@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,7 @@ import net.adriancituk.joseaguilar.model.Producto;
 import net.adriancituk.joseaguilar.service.IClientesService;
 import net.adriancituk.joseaguilar.service.IFacturasService;
 import net.adriancituk.joseaguilar.service.IProductoService;
+
 
 
 
@@ -74,13 +77,24 @@ public class FacturasController {
 
 	@PostMapping("/save")
 	public String guardarFactura(@ModelAttribute("factura") Factura factura, BindingResult result, RedirectAttributes attributes) {
-	    System.out.println("Factura recibida: " + factura.toString());
+		 System.out.println("Factura recibida: " + factura.toString());
 
+		    if (factura.getDescripcion() == null || factura.getDescripcion().isEmpty()) {
+		        // Manejo de error si la descripción está vacía
+		        System.out.println("Error: La descripción no puede estar vacía");
+		        // Puedes agregar un mensaje de error o redirigir a una página de error
+		        return "redirect:/facturas/facturasUsuario";
+		    }
+		
+		System.out.println("Factura recibida: " + factura.toString());
+
+	    // 1. Obtención del Cliente
 	    Cliente cliente = serviceClientes.buscarPorId(factura.getCliente().getId());
 
 	    if (cliente != null) {
 	        factura.setCliente(cliente);
 
+	        // 2. Establecimiento de Detalles
 	        if (factura.getDetalles() != null) {
 	            // Establecer la relación de los detalles con la factura
 	            for (DetalleFactura detalle : factura.getDetalles()) {
@@ -89,9 +103,11 @@ public class FacturasController {
 	            }
 	        }
 
+	        // 3. Guardado de Factura
 	        serviceFacturas.guardar(factura);
-	        attributes.addFlashAttribute("msg", "Factura Guardada");
 
+	        // 4. Redirección y Mensaje de Éxito
+	        attributes.addFlashAttribute("msg", "Factura Guardada");
 	        return "redirect:/facturas/facturasUsuario";
 	    } else {
 	        // Manejo de error si el cliente no se encuentra
@@ -111,6 +127,16 @@ public class FacturasController {
     	
 		return "redirect:/facturas/facturasUsuario";
 	}
+    @GetMapping("/search")
+    public String buscar(@ModelAttribute("search")  Producto vacante,Model model) {
+    	System.out.println("Buscando por: "+vacante);
+    	ExampleMatcher matcher= ExampleMatcher.matching().withMatcher("nombreProducto", ExampleMatcher.GenericPropertyMatchers.contains());
+    	Example<Producto>example=Example.of(vacante,matcher);
+    	List<Producto>lista=serviceProductos.buscarByExample(example);
+    	model.addAttribute("productos", lista);
+    	
+    	return "facturas/facturasUsuario";
+    }
     @ModelAttribute
 	public void setGenericos(Model model) {
 		model.addAttribute("facturas",serviceFacturas.buscarTodos());

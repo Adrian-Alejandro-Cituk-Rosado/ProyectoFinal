@@ -85,6 +85,8 @@ public class HomeController {
 	
 		return "/formCliente";
 	}
+	
+	
 	@ModelAttribute
 	public void setGenericos(Model model) {
 		model.addAttribute("clientes",serviceClientes.buscarTodas());

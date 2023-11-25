@@ -2,8 +2,11 @@ package net.adriancituk.joseaguilar.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Example;
+
 import net.adriancituk.joseaguilar.model.Cliente;
 import net.adriancituk.joseaguilar.model.Producto;
+
 
 
 
@@ -24,5 +27,7 @@ public interface IProductoService {
 	// Ejercicio: Implementar método que recupera todos los usuarios. Usar vista de listUsuarios.html
 	List<Producto> buscarTodos();
 	Producto buscarPorId(Integer idProducto);
+
+	List<Producto>buscarByExample(Example <Producto>example);
 	
 }

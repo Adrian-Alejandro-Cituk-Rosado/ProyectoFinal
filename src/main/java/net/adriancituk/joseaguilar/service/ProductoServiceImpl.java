@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import net.adriancituk.joseaguilar.model.Cliente;
@@ -42,4 +43,11 @@ public class ProductoServiceImpl implements IProductoService {
 		return null;
 	}
 
+	@Override
+	public List<Producto> buscarByExample(Example<Producto> example) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }
