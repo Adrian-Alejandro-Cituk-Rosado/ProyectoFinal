@@ -29,9 +29,7 @@
                 <h4 class="card-header"><strong>Datos de la Factura</strong></h4>              
                 <div class="card-body">
                     <form th:action="@{/facturas/save}" method="post" th:object="${factura}" enctype="multipart/form-data">   
-                        <!-- Otros campos de la factura (fecha, descripción, observación, etc.) -->
                         <div class="row">
-                            <!-- Campo de fecha -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="fecha">Fecha:</label>
@@ -39,7 +37,6 @@
                                 </div>
                             </div>
 
-                            <!-- Campo de descripción -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="descripcion">Descripción:</label>
@@ -47,7 +44,6 @@
                                 </div>
                             </div>
 
-                            <!-- Campo de observación -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="observacion">Observación:</label>
@@ -56,7 +52,6 @@
                             </div>
                         </div>
 
-                        <!-- Detalles de productos comprados -->
                         <div class="row">
                             <div class="col-md-12">
                                 <h5>Productos Comprados</h5>
@@ -65,29 +60,21 @@
                                         <tr>
                                             <th>Producto</th>
                                             <th>Cantidad</th>
-                                            <!-- Puedes agregar más encabezados según tus necesidades -->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Itera sobre los detalles de la factura para mostrar productos y cantidades -->
                                         <tr th:each="detalle : ${factura.detalles}">
                                             <td th:text="${detalle.producto.nombreProducto}" />
                                             <td th:text="${detalle.cantidad}" />
-                                            <!-- Puedes agregar más celdas según tus necesidades -->
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
-                        <!-- Otros campos según tus necesidades -->
-
-                        <!-- Botón de Guardar -->
-
                     </form>
                 </div>
             </div>
-        </div> <!-- /container -->
+        </div>
     </main>
 
     <!-- Pie de página -->
@@ -110,3 +97,4 @@
     </script>
 </body>
 </html>
+
