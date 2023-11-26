@@ -57,20 +57,20 @@ public class FacturasController {
 
 	    Factura factura = new Factura();
 
-	    // Busca el cliente por ID
+
 	    Cliente clienteSeleccionado = serviceClientes.buscarPorId(idCliente);
 
-	    // Establece el cliente en la factura
+
 	    if (clienteSeleccionado != null) {
 	        factura.setCliente(clienteSeleccionado);
 	    }
 
-	    // Cargar la lista de productos
+
 	    List<Producto> productos = serviceProductos.buscarTodos();
 	    model.addAttribute("productos", productos);
 
 	    model.addAttribute("factura", factura);
-	    model.addAttribute("cliente", clienteSeleccionado); // Añade el cliente al modelo
+	    model.addAttribute("cliente", clienteSeleccionado); 
 
 	    return "facturas/facturasUsuario";
 	}
@@ -79,33 +79,28 @@ public class FacturasController {
 	public String guardarFactura(@ModelAttribute("factura") Factura factura, BindingResult result, RedirectAttributes attributes) {
 		
 
-	    // 1. Obtención del Cliente
 	    Cliente cliente = serviceClientes.buscarPorId(factura.getCliente().getId());
 
 	    if (cliente != null) {
 	        factura.setCliente(cliente);
-
-	        // 2. Establecimiento de Detalles
 	        if (factura.getDetalles() != null) {
-	            // Establecer la relación de los detalles con la factura
+
 	            for (DetalleFactura detalle : factura.getDetalles()) {
 	                detalle.setFactura(factura);
 	                System.out.println("Detalle: " + detalle.toString());
 	            }
 	        }
 
-	        // 3. Guardado de Factura
+
 	        serviceFacturas.guardar(factura);
 
-	        // 4. Redirección y Mensaje de Éxito
+
 	        attributes.addFlashAttribute("msg", "Factura Guardada");
 	        return "redirect:/facturas/detalleFactura/" + factura.getId();
 
 	    } else {
-	        // Manejo de error si el cliente no se encuentra
-	        // Puedes agregar un mensaje de error o redirigir a una página de error
 	        System.out.print("error");
-	        return "redirect:/facturas/facturasUsuario"; // O redirige a una página de error
+	        return "redirect:/facturas/facturasUsuario";
 	    }
 	}
 
@@ -146,8 +141,7 @@ public class FacturasController {
 	            model.addAttribute("factura", factura);
 	            return "facturas/detalleFactura";
 	        } else {
-	            // Manejo de error si la factura no se encuentra
-	            // Puedes agregar un mensaje de error o redirigir a una página de error
+
 	            return "redirect:/facturas/facturasUsuario";
 	        }
 	    }

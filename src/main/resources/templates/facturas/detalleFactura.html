@@ -1,100 +1,113 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
 
-    <title>Visualizar Factura</title>
-    <!-- Bootstrap core CSS -->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
-    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
-    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="favicon.ico">
+
+	<title>Visualizar Factura</title>
+	<!-- Bootstrap core CSS -->
+	<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+	<link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Encabezado y menú -->
-    <header th:insert="fragments/menu :: menu-principal"></header>
+	<!-- Encabezado y menú -->
+	<header th:insert="fragments/menu :: menu-principal"></header>
 
-    <!-- Contenido principal -->
-    <main role="main">     
-        <hr>
-        <div class="container"> 
-            <div class="card">
-                <h4 class="card-header"><strong>Datos de la Factura</strong></h4>              
-                <div class="card-body">
-                    <form th:action="@{/facturas/save}" method="post" th:object="${factura}" enctype="multipart/form-data">   
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="fecha">Fecha:</label>
-                                    <input type="text" class="form-control" id="fecha" th:value="${#dates.format(factura.fecha, 'dd-MM-yyyy')}" readonly>
-                                </div>
-                            </div>
+	<!-- Contenido principal -->
+	<main role="main">
+		<hr>
+		<div class="container">
+			<div class="card">
+				<h4 class="card-header"><strong>Datos de la Factura</strong></h4>
+				<div class="card-body">
+					<div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+					<form th:action="@{/facturas/save}" method="post" th:object="${factura}"
+						enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="fecha">Fecha:</label>
+									<input type="text" class="form-control" id="fecha"
+										th:value="${#dates.format(factura.fecha, 'dd-MM-yyyy')}" readonly>
+								</div>
+							</div>
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción:</label>
-                                    <input type="text" class="form-control" id="descripcion" th:value="${factura.descripcion}" readonly>
-                                </div>
-                            </div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="descripcion">Descripción:</label>
+									<input type="text" class="form-control" id="descripcion"
+										th:value="${factura.descripcion}" readonly>
+								</div>
+							</div>
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="observacion">Observación:</label>
-                                    <input type="text" class="form-control" id="observacion" th:value="${factura.observacion}" readonly>
-                                </div>
-                            </div>
-                        </div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="observacion">Observación:</label>
+									<input type="text" class="form-control" id="observacion"
+										th:value="${factura.observacion}" readonly>
+								</div>
+							</div>
+						</div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h5>Productos Comprados</h5>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th>Cantidad</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="detalle : ${factura.detalles}">
-                                            <td th:text="${detalle.producto.nombreProducto}" />
-                                            <td th:text="${detalle.cantidad}" />
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </main>
+						<div class="row">
+							<div class="col-md-12">
+								<h5>Productos Comprados</h5>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Producto</th>
+											<th>Cantidad</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="detalle : ${factura.detalles}">
+											<td th:text="${detalle.producto.nombreProducto}" />
+											<td th:text="${detalle.cantidad}" />
+										</tr>
+									</tbody>
+								</table>
+								<div class="row"> <!-- Nueva grilla para el botón -->
+									<div class="col-md-12 text-center">
+										<a class="btn btn-success animado-button" style="width: 20%;" th:href="@{/}"
+											role="button">Regresar &raquo;</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
 
-    <!-- Pie de página -->
-    <footer th:insert="/fragments/footer :: pie-pagina" class="footer"></footer>
+	<!-- Pie de página -->
+	<footer th:insert="/fragments/footer :: pie-pagina" class="footer"></footer>
 
-    <!-- Bootstrap core JavaScript y otros scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>    
-    <script>
-       $(function () {
-        $("#fecha").datepicker({
-            dateFormat: 'dd-mm-yy',
-            showButtonPanel: true,
-            changeMonth: true,
-            changeYear: true,
-            yearRange: 'c-100:c+10'
-        });
-    });
-    </script>
+	<!-- Bootstrap core JavaScript y otros scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script>
+		$(function () {
+			$("#fecha").datepicker({
+				dateFormat: 'dd-mm-yy',
+				showButtonPanel: true,
+				changeMonth: true,
+				changeYear: true,
+				yearRange: 'c-100:c+10'
+			});
+		});
+	</script>
 </body>
-</html>
 
+</html>

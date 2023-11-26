@@ -22,7 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.adriancituk.joseaguilar.model.Cliente;
+import net.adriancituk.joseaguilar.model.Factura;
 import net.adriancituk.joseaguilar.service.IClientesService;
+import net.adriancituk.joseaguilar.service.IFacturasService;
 import net.adriancituk.joseaguilar.utill.Utileria;
 
 
@@ -32,6 +34,8 @@ public class HomeController {
 	private String ruta;
 	@Autowired
 	IClientesService serviceClientes;
+	@Autowired
+	IFacturasService serviceFacturas;
 	@GetMapping("/")
 	public String mostrarHome(Model model) {
 		List<Cliente>lista=serviceClientes.buscarTodas();
@@ -86,12 +90,21 @@ public class HomeController {
 		return "/formCliente";
 	}
 	@GetMapping("/ver/{id}")
-	public String ver(@PathVariable("id") int idVacante,Model model) {
-		Cliente vacante= serviceClientes.buscarPorId(idVacante);
-		model.addAttribute("cliente", vacante);
-	
-		return "/facturas/listFacturas";
+	public String ver(@PathVariable("id") int idCliente, Model model) {
+	    Cliente cliente = serviceClientes.buscarPorId(idCliente);
+
+	    if (cliente != null) {
+	        List<Factura> facturasCliente = cliente.getFacturas();
+
+	        model.addAttribute("cliente", cliente);
+	        model.addAttribute("facturas", facturasCliente);
+
+	        return "/facturas/listFacturas";
+	    } else {
+	        return "redirect:/error";
+	    }
 	}
+
 	
 	@ModelAttribute
 	public void setGenericos(Model model) {

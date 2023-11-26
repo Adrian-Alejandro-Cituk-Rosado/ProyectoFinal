@@ -1,10 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>Hola</h1>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Proyecto final</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+ 
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header th:insert="fragments/menu :: menu-principal"></header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Datos del cliente</strong></h4>              
+          <div class="card-body">
+            <form th:action="@{/save}" method="post" th:object="${cliente}"enctype="multipart/form-data">   
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{imagen}">
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Nombre" required="required" readonly>
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{apellido}" id="apellido" name="apellido" placeholder="Apellido" required="required" readonly>
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" th:field="*{email}" id="email" name="email" placeholder="Email" required="required" readonly>
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="createAt">Fecha de Publicación</label>
+                    <input type="text" class="form-control"  th:field ="*{createAt}"name="createAt" id="createAt" placeholder="Fecha" required="required" readonly>
+                  </div>  
+                </div>
+              </div>    
+              <hr>
+              <table class="table table-hover ">
+						<thead class="thead-dark">
+							<tr>
+								
+								<th scope="col">Folio</th>
+								<th scope="col">Descripción</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Total</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="factura : ${facturas}">
+    <!-- Muestra la información de cada factura -->
+    <td th:text="${factura.folio}"></td>
+    <td th:text="${factura.descripcion}"></td>
+    <td th:text="${#dates.format(factura.fecha, 'dd-MM-yyyy')}"></td>
+     <td th:text="${factura.calcularTotal()}"></td>
+</tr>
+
+						</tbody>
+					</table>
+            </form>
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer th:insert="/fragments/footer :: pie-pagina" class="footer">
+      
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>    
+    <script th:src="@{/tinymce/tinymce.min.js}"></script>
+
+  </body>
 </html>

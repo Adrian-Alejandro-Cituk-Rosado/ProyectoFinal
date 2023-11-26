@@ -25,13 +25,21 @@ public class Factura {
 	private String observacion;
 	private Date fecha;
     
-	@ManyToOne(fetch = FetchType.EAGER) // Agregar esta línea
+	@ManyToOne(fetch = FetchType.EAGER) 
     @JoinColumn(name = "idCliente")
     private Cliente cliente;
 	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
 	private List<DetalleFactura> detalles;
 
-
+	public double calcularTotal() {
+        double total = 0.0;
+        if (detalles != null) {
+            for (DetalleFactura detalle : detalles) {
+                total += detalle.calcularSubtotal();
+            }
+        }
+        return total;
+    }
 	public Integer getId() {
 		return id;
 	}

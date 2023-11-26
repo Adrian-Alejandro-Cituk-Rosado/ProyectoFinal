@@ -24,6 +24,9 @@ public class DetalleFactura {
     private Producto producto;
 
     private int cantidad;
+    public double calcularSubtotal() {
+        return cantidad * producto.getPrecioProducto();
+    }
 
 	public Integer getId() {
 		return id;
