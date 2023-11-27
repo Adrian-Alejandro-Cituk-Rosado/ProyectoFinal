@@ -75,7 +75,7 @@
     <td th:text="${factura.folio}"></td>
     <td th:text="${factura.descripcion}"></td>
     <td th:text="${#dates.format(factura.fecha, 'dd-MM-yyyy')}"></td>
-     <td th:text="${factura.calcularTotal()}"></td>
+     <td th:text="'$' +${factura.calcularTotal()}"></td>
 </tr>
 
 						</tbody>
