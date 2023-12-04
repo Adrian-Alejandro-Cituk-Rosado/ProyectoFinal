@@ -83,7 +83,7 @@ public class HomeController {
 		System.out.println(" Vacante: "+vacante);
 		
 		
-		return "redirect:/";
+		return "redirect:/indexPaginate";
 		
 	}
 	@GetMapping("/delete/{id}")
@@ -91,7 +91,7 @@ public class HomeController {
 		System.out.println("Borrando vacante con id: "+idVacante);
 		serviceClientes.eliminar(idVacante);
 		attributes.addFlashAttribute("msg","El usuario fue eliminado!");
-		return "redirect:/";
+		return "redirect:/indexPaginate";
 	}
 	@GetMapping("/edit/{id}")
 	public String editar(@PathVariable("id") int idVacante,Model model) {
@@ -163,7 +163,7 @@ public class HomeController {
 	serviceUsuarios.guardar(usuario);
 	attributes.addFlashAttribute("msgType", "success");
 	attributes.addFlashAttribute("msg", "Usuario Registrado");
-		return "redirect:/";
+		return "redirect:/indexPaginate";
 	
 	}
 

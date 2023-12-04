@@ -45,7 +45,7 @@ public class ProductoController {
     	serviceProducto.eliminar(idUsuario);
 		attributes.addFlashAttribute("msg","El producto fue eliminado!");
     	
-		return "redirect:/productos/index";
+		return "redirect:/productos/indexPaginate";
 	}
     @GetMapping("/create")
 	public String crear(Producto productos,Model model) {
@@ -61,7 +61,7 @@ public class ProductoController {
 		System.out.println(" Producto: "+vacante);
 		
 		
-		return "redirect:/productos/index";
+		return "redirect:/productos/indexPaginate";
 		
 	}
     @GetMapping("/edit/{id}")

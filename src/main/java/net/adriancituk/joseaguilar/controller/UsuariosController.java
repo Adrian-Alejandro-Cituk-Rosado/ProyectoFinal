@@ -51,6 +51,6 @@ public class UsuariosController {
 		 attributes.addFlashAttribute("msgType", "danger");
 		attributes.addFlashAttribute("msg","El usuario fue eliminado!");
     	
-		return "redirect:/usuarios/index";
+		return "redirect:/usuarios/indexPaginate";
 	}
   }
