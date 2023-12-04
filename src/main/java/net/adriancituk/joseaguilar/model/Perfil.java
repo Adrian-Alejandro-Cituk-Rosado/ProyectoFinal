@@ -12,15 +12,15 @@ public class Perfil {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer  id;
 
     private String perfil;
 
-	public Long getId() {
+	public Integer  getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -30,11 +30,6 @@ public class Perfil {
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
-	}
-
-	@Override
-	public String toString() {
-		return "Perfil [id=" + id + ", perfil=" + perfil + "]";
 	}
     
 }

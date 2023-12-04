@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -26,9 +25,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.adriancituk.joseaguilar.model.Cliente;
 import net.adriancituk.joseaguilar.model.Factura;
+import net.adriancituk.joseaguilar.model.Perfil;
+import net.adriancituk.joseaguilar.model.Usuario;
 import net.adriancituk.joseaguilar.service.IClientesService;
 import net.adriancituk.joseaguilar.service.IFacturasService;
+import net.adriancituk.joseaguilar.service.IUsuariosService;
 import net.adriancituk.joseaguilar.utill.Utileria;
+
 
 
 
@@ -40,6 +43,8 @@ public class HomeController {
 	IClientesService serviceClientes;
 	@Autowired
 	IFacturasService serviceFacturas;
+	@Autowired
+	IUsuariosService serviceUsuarios;
 	@GetMapping("/")
 	public String mostrarHome(Model model) {
 		List<Cliente>lista=serviceClientes.buscarTodas();
@@ -128,5 +133,31 @@ public class HomeController {
 		}
 		return ("redirect:/");
 	}
+	
+	@GetMapping("/signup")
+	public String registrarse(Model model) {
+	    model.addAttribute("usuario", new Usuario());
+	    return "usuarios/formRegistro";
+	}
+	
+
+	@PostMapping("/signup")
+	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+		usuario.setFechaRegistro(new Date());
+	     usuario.setEstatus(1);
+	     usuario.setPassword("{noop}" + usuario.getPassword());
+	Perfil perfil =new Perfil();
+	perfil.setId(1);
+	
+	usuario.agregar(perfil);
+	
+		// Ejercicio.
+	serviceUsuarios.guardar(usuario);
+	attributes.addFlashAttribute("msgType", "success");
+	attributes.addFlashAttribute("msg", "Usuario Registrado");
+		return "redirect:/";
+	
+	}
+
 	
 }

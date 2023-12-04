@@ -11,6 +11,9 @@
           <li class="nav-item" sec:authorize="hasAnyAuthority('Administrador')">
               <a class="nav-link active navbar-brand" th:href="@{/productos/index}">Productos</a>
           </li>
+            <li class="nav-item"sec:authorize="hasAnyAuthority('Administrador')">
+              <a class="nav-link active" th:href="@{/usuarios/index}">Usuarios</a>
+            </li>
       </ul>
       <div sec:authorize="isAnonymous()">
 		 <a class="btn btn-primary navbar-brand" th:href="@{/index}"><i class="fas fa-user" aria-hidden="true"></i> Ingresar</a>&nbsp;

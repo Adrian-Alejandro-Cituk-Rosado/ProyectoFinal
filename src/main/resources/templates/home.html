@@ -29,7 +29,7 @@
 						Clientes</strong></h4>
 
 				<div class="card-body">
-					<a th:href="@{/create}" class="btn btn-success" title="Crear nuevo cliente" role="button">
+					<a th:href="@{/create}" class="btn btn-success" title="Crear nuevo cliente" role="button" sec:authorize="hasAnyAuthority('Administrador')">
 						<i class="fas fa-user" aria-hidden="true"></i> Crear Cliente
 					</a>
 					<hr>
@@ -43,9 +43,9 @@
 								<th scope="col">Apellido</th>
 								<th scope="col">Email</th>
 								<th scope="col">Fecha</th>
-								<th scope="col">Crear factura</th>
-								<th scope="col">Editar</th>
-								<th scope="col">Eliminar</th>
+								<th scope="col" sec:authorize="hasAnyAuthority('Administrador')">Crear factura</th>
+								<th scope="col" sec:authorize="hasAnyAuthority('Administrador')">Editar</th>
+								<th scope="col" sec:authorize="hasAnyAuthority('Administrador')">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,17 +61,17 @@
 								<td th:text="${cliente.apellido}"></td>
 								<td th:text="${cliente.email}"></td>
 								<td th:text="${cliente.createAt}"></td>
-								<td> <a th:href="@{/facturas/create/{id}(id=${cliente.id})}" class="btn btn-primary"
+								<td  sec:authorize="hasAnyAuthority('Administrador')"> <a th:href="@{/facturas/create/{id}(id=${cliente.id})}" class="btn btn-primary" 
 										title="Crear nueva factura" role="button">
 										<i class="fas fa-file" aria-hidden="true"></i> Crear factura
 									</a></td>
-								<td><!-- Fecha de publicación formateada -->
+								<td  sec:authorize="hasAnyAuthority('Administrador')"><!-- Fecha de publicación formateada -->
 									<a th:href="@{/edit/{id} (id=${cliente.id})}" class="btn btn-primary btn-sm"
 										role="button" title="Editar el registro.">
 										<i class="fas fa-pencil-alt" aria-hidden="true"></i>
 									</a>
 								</td>
-								<td><a th:href="@{/delete/{id} (id=${cliente.id})}"
+								<td sec:authorize="hasAnyAuthority('Administrador')"><a th:href="@{/delete/{id} (id=${cliente.id})}"
 										onclick="return confirm('¿Estás seguro?')" class="btn btn-danger btn-sm"
 										role="button" title="Eliminar el registro.">
 										<i class="fas fa-trash" aria-hidden="true"></i>
