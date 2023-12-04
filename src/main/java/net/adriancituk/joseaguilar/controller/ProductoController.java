@@ -3,6 +3,8 @@ package net.adriancituk.joseaguilar.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,5 +70,11 @@ public class ProductoController {
 		model.addAttribute("producto", vacante);
 	
 		return "/productos/formProductos";
+	}
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+	Page<Producto>lista = serviceProducto.buscarTodas(page);
+	model.addAttribute("productos", lista);
+	return "productos/listProductos";
 	}
 }

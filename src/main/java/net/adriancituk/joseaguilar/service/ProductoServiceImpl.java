@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.adriancituk.joseaguilar.model.Cliente;
@@ -47,6 +49,12 @@ public class ProductoServiceImpl implements IProductoService {
 	public List<Producto> buscarByExample(Example<Producto> example) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Page<Producto> buscarTodas(Pageable page) {
+		// TODO Auto-generated method stub
+		return productoRepo.findAll(page);
 	}
 
 	

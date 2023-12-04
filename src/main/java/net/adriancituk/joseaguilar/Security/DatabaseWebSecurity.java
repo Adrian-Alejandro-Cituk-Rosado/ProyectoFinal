@@ -34,7 +34,9 @@ public class DatabaseWebSecurity {
 				
 
 				.anyRequest().authenticated();
-		http.formLogin(form -> form.permitAll());
+		http.formLogin(form -> form
+                .defaultSuccessUrl("/indexPaginate") // Redirección después del inicio de sesión exitoso
+                .permitAll());
 		return http.build();
 	}
 }

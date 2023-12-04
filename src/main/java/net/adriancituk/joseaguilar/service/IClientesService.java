@@ -15,5 +15,5 @@ public interface IClientesService {
 	void guardar(Cliente cliente);
 	void eliminar(Integer idCliente);
 	List<Cliente>buscarByExample(Example <Cliente>example);
-	//Page<Cliente>buscarTodas(Pageable page);
+	Page<Cliente>buscarTodas(Pageable page);
 }

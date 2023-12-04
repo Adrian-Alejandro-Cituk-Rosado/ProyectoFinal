@@ -2,6 +2,10 @@ package net.adriancituk.joseaguilar.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import net.adriancituk.joseaguilar.model.Producto;
 import net.adriancituk.joseaguilar.model.Usuario;
 
 public interface IUsuariosService {
@@ -20,4 +24,5 @@ public interface IUsuariosService {
 	
 	// Ejercicio: Implementar método que recupera todos los usuarios. Usar vista de listUsuarios.html
 	List<Usuario> buscarTodos();
+	Page<Usuario>buscarTodas(Pageable page);
 }

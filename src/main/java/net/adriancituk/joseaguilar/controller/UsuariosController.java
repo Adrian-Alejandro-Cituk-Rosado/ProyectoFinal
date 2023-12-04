@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import net.adriancituk.joseaguilar.model.Producto;
 import net.adriancituk.joseaguilar.model.Usuario;
 import net.adriancituk.joseaguilar.service.IUsuariosService;
 
@@ -31,6 +34,12 @@ public class UsuariosController {
 		model.addAttribute("usuarios", lista);
     	
     	return "usuarios/listUsuarios";
+	}
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+	Page<Usuario>lista = serviceUsuario.buscarTodas(page);
+	model.addAttribute("usuarios", lista);
+	return "usuarios/listUsuarios";
 	}
     
     @GetMapping("/delete/{id}")
