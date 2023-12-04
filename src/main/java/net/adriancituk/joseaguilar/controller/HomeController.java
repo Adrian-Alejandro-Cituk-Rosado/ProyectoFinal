@@ -133,7 +133,7 @@ public class HomeController {
 		for(GrantedAuthority rol: auth.getAuthorities()) {
 		System.out.println("Rol: "+rol.getAuthority());
 		}
-		return ("redirect:/");
+		return ("redirect:/indexPaginate");
 	}
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
@@ -169,4 +169,3 @@ public class HomeController {
 
 	
 }
-//hola
