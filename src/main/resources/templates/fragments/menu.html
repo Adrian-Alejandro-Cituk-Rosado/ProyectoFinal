@@ -8,12 +8,15 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
        
-          <li class="nav-item">
+          <li class="nav-item" sec:authorize="hasAnyAuthority('Administrador')">
               <a class="nav-link active navbar-brand" th:href="@{/productos/index}">Productos</a>
           </li>
       </ul>
-      <a class="btn btn-primary navbar-brand" href="#"><i class="fas fa-user" aria-hidden="true"></i> Ingresar</a>&nbsp;
-      <a class="btn btn-success navbar-brand" th:href="@{/signup}"><i class="fas fa-address-book" aria-hidden="true"></i> Registrarse</a>&nbsp;
-      <a class="btn btn-danger navbar-brand" th:href="@{/logout}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Salir</a>
+      <div sec:authorize="isAnonymous()">
+		 <a class="btn btn-primary navbar-brand" th:href="@{/index}"><i class="fas fa-user" aria-hidden="true"></i> Ingresar</a>&nbsp;
+      <a class="btn btn-success navbar-brand" th:href="@{/signup}"><i class="fas fa-address-book" aria-hidden="true"></i> Registrarse</a>&nbsp;   
+  </div>
+  <div sec:authorize="isAuthenticated()">
+	  <a class="btn btn-danger navbar-brand" th:href="@{/logout}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Salir</a>
   </div>
 </nav>

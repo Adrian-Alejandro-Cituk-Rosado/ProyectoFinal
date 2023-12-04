@@ -7,6 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +29,7 @@ import net.adriancituk.joseaguilar.model.Factura;
 import net.adriancituk.joseaguilar.service.IClientesService;
 import net.adriancituk.joseaguilar.service.IFacturasService;
 import net.adriancituk.joseaguilar.utill.Utileria;
+
 
 
 @Controller
@@ -115,4 +119,14 @@ public class HomeController {
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
+	@GetMapping("/index")
+	public String index(Authentication auth) {
+		String username=auth.getName();
+		System.out.println("Nombre del usuario: "+username);
+		for(GrantedAuthority rol: auth.getAuthorities()) {
+		System.out.println("Rol: "+rol.getAuthority());
+		}
+		return ("redirect:/");
+	}
+	
 }

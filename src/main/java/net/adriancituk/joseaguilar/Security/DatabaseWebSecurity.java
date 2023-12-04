@@ -29,7 +29,9 @@ public class DatabaseWebSecurity {
 				// Los recursos estáticos no requieren autenticación
 				.requestMatchers("/bootstrap/**", "/images/**", "/tinymce/**", "/logos/**").permitAll()
 				// Las vistas públicas no requieren autenticación
-				.requestMatchers("/", "/signup", "/search", "/vacantes/view/**").permitAll()
+				.requestMatchers("/", "/signup","/ver/**").permitAll()
+				.requestMatchers("/productos/**").hasAnyAuthority("Administrador")
+				
 
 				.anyRequest().authenticated();
 		http.formLogin(form -> form.permitAll());
